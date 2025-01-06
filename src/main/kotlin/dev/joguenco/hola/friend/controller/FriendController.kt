@@ -1,7 +1,7 @@
 package dev.joguenco.hola.friend.controller
 
-import dev.joguenco.hola.friend.dto.FriendCreateDto
-import dev.joguenco.hola.friend.dto.FriendCreateResponseDto
+import dev.joguenco.hola.friend.dto.FriendDataDto
+import dev.joguenco.hola.friend.dto.FriendResponseDto
 import dev.joguenco.hola.friend.service.FriendService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -19,17 +19,35 @@ class FriendController {
 
     @GetMapping("/friend/{id}")
     fun getFriend(@PathVariable id: Long) : ResponseEntity<Any> {
-        val response = friendService.getFriendById(id)
-
-        return if (response != null) {
-            ResponseEntity.ok(response)
-        } else {
-            ResponseEntity.notFound().build()
+        try {
+            val friend = friendService.getFriendById(id)
+            return ResponseEntity.ok(friend)
+        } catch (e: Exception) {
+            return ResponseEntity.noContent().build()
         }
     }
 
     @PostMapping("/friend")
-    fun createFriend(@RequestBody friend: FriendCreateDto) : ResponseEntity<FriendCreateResponseDto> {
+    fun createFriend(@RequestBody friend: FriendDataDto) : ResponseEntity<FriendResponseDto> {
         return ResponseEntity.ok(friendService.createFriend(friend))
+    }
+
+    @PutMapping("/friend/{id}")
+    fun updateFriend(@PathVariable id: Long, @RequestBody friendDto: FriendDataDto) : ResponseEntity<Any> {
+        return try {
+            ResponseEntity.ok(friendService.updateFriend(id, friendDto))
+        } catch (e: Exception) {
+            ResponseEntity.noContent().build()
+        }
+    }
+
+    @DeleteMapping("/friend/{id}")
+    fun deleteFriend(@PathVariable id: Long) : ResponseEntity<Any> {
+        return try {
+            val friend = friendService.deleteFriend(id)
+            return ResponseEntity.ok(friend)
+        } catch (e: Exception) {
+            ResponseEntity.noContent().build()
+        }
     }
 }

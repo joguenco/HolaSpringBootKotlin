@@ -11,10 +11,10 @@ class Friend  (
     val id: Long? = null,
 
     @Column(name = "name")
-    val name: String? = null,
+    var name: String? = null,
 
     @Column(name = "birth_date")
-    val birthDate: Date? = null
+    var birthDate: Date? = null
 ) {
     override fun toString(): String {
         return "Friend(id=$id, name=$name)"
