@@ -16,4 +16,24 @@ In second terminal run:
 gradle bootRun
 ```
 
-
+## Code Formatter
+In the plugin{} blocks in your Gradle file:
+```
+plugins {
+        id("com.ncorti.ktfmt.gradle") version "<latest_version>"
+    }
+```
+To enable different styles you can simply:
+```
+ktfmt {
+    // Google style - 2 space indentation & automatically adds/removes trailing commas
+    googleStyle()
+    
+    // KotlinLang style - 4 space indentation - From kotlinlang.org/docs/coding-conventions.html
+    kotlinLangStyle()
+}
+```
+and run:
+```
+gradle :ktfmtFormat
+```

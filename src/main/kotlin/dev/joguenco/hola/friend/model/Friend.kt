@@ -13,13 +13,14 @@ class Friend(
         mappedBy = "friend",
         targetEntity = Skill::class,
         cascade = [CascadeType.ALL],
-        fetch = FetchType.LAZY)
-    var skills: List<Skill> = emptyList()
+        fetch = FetchType.LAZY,
+    )
+    var skills: List<Skill> = emptyList(),
 ) {
 
-  constructor(id: Long?, name: String?, birthDate: Date?) : this(id, name, birthDate, emptyList())
+    constructor(id: Long?, name: String?, birthDate: Date?) : this(id, name, birthDate, emptyList())
 
-  override fun toString(): String {
-    return "Friend(id=$id, name=$name)"
-  }
+    override fun toString(): String {
+        return "Friend(id=$id, name=$name)"
+    }
 }

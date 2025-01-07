@@ -13,47 +13,50 @@ import org.springframework.stereotype.Service
 @Service
 class FriendService(
     private val friendRepository: FriendRepository,
-    private val skillRepository: SkillRepository
+    private val skillRepository: SkillRepository,
 ) {
 
-  private val friendMapper = FriendMapperImpl()
+    private val friendMapper = FriendMapperImpl()
 
-  fun createFriend(friendDto: FriendCreateDto): FriendResponseDto {
-    val friend = friendMapper.toEntity(friendDto)
-    friend.skills.forEach { it.friend = friend }
-    val friendSaved = friendRepository.save(friend)
+    fun createFriend(friendDto: FriendCreateDto): FriendResponseDto {
+        val friend = friendMapper.toEntity(friendDto)
+        friend.skills.forEach { it.friend = friend }
+        val friendSaved = friendRepository.save(friend)
 
-    return friendMapper.toDtoResponse(friendSaved)
-  }
+        return friendMapper.toDtoResponse(friendSaved)
+    }
 
-  fun getAllFriends(): List<FriendResponseDto> {
-    return friendRepository.findAll().map { friendMapper.toDtoResponse(it) }
-  }
+    fun getAllFriends(): List<FriendResponseDto> {
+        return friendRepository.findAll().map { friendMapper.toDtoResponse(it) }
+    }
 
-  fun getFriendById(id: Long): FriendDto? {
-    val friend =
-        friendMapper.toDto(
-            friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found"))
+    fun getFriendById(id: Long): FriendDto? {
+        val friend =
+            friendMapper.toDto(
+                friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
+            )
 
-    val skills = skillRepository.findAllByFriendId(id)
-    skills.map { friend.skills.add(SkillDto(it.name.toString())) }
+        val skills = skillRepository.findAllByFriendId(id)
+        skills.map { friend.skills.add(SkillDto(it.name.toString())) }
 
-    return friend
-  }
+        return friend
+    }
 
-  fun updateFriend(id: Long, friendDto: FriendCreateDto): FriendResponseDto {
-    val friend = friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
+    fun updateFriend(id: Long, friendDto: FriendCreateDto): FriendResponseDto {
+        val friend =
+            friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
 
-    friend.name = friendDto.name
-    friend.birthDate = friendDto.birthDate
+        friend.name = friendDto.name
+        friend.birthDate = friendDto.birthDate
 
-    return friendMapper.toDtoResponse(friendRepository.save(friend))
-  }
+        return friendMapper.toDtoResponse(friendRepository.save(friend))
+    }
 
-  fun deleteFriend(id: Long): RemoveDto {
-    val friend = friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
-    friendRepository.deleteById(id)
+    fun deleteFriend(id: Long): RemoveDto {
+        val friend =
+            friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
+        friendRepository.deleteById(id)
 
-    return friendMapper.toDtoDelete(friend)
-  }
+        return friendMapper.toDtoDelete(friend)
+    }
 }

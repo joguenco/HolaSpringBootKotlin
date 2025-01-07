@@ -51,3 +51,7 @@ allOpen {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+ktfmt {
+	kotlinLangStyle()
+}

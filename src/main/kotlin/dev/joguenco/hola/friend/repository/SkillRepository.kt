@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository
 @Repository
 class SkillRepository : CustomSkillRepository {
 
-  @PersistenceContext lateinit var entityManager: EntityManager
+    @PersistenceContext lateinit var entityManager: EntityManager
 
-  override fun findAllByFriendId(friendId: Long): List<Skill> {
-    return entityManager
-        .createQuery("select s from Skill s where s.friend.id = :friendId", Skill::class.java)
-        .setParameter("friendId", friendId)
-        .resultList
-  }
+    override fun findAllByFriendId(friendId: Long): List<Skill> {
+        return entityManager
+            .createQuery("select s from Skill s where s.friend.id = :friendId", Skill::class.java)
+            .setParameter("friendId", friendId)
+            .resultList
+    }
 }

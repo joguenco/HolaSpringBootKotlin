@@ -4,7 +4,7 @@ import dev.joguenco.hola.friend.dto.SkillDto
 import dev.joguenco.hola.friend.model.Skill
 
 interface SkillMapper {
-  fun toEntity(dto: SkillDto): Skill
+    fun toEntity(dto: SkillDto): Skill
 
-  fun toDto(entity: Skill): SkillDto
+    fun toDto(entity: Skill): SkillDto
 }

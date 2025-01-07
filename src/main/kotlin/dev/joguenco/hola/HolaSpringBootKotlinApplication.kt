@@ -6,5 +6,5 @@ import org.springframework.boot.runApplication
 @SpringBootApplication class HolaSpringBootKotlinApplication
 
 fun main(args: Array<String>) {
-  runApplication<HolaSpringBootKotlinApplication>(*args)
+    runApplication<HolaSpringBootKotlinApplication>(*args)
 }
