@@ -18,7 +18,7 @@ class FriendMapperImpl : FriendMapper {
         )
     }
 
-    override fun toDtoData(entity: Friend): FriendResponseDto {
+    override fun toDtoResponse(entity: Friend): FriendResponseDto {
         return FriendResponseDto(
             id = entity.id!!,
             name = entity.name!!,

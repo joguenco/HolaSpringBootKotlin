@@ -9,7 +9,7 @@ import dev.joguenco.hola.shared.dto.RemoveDto
 interface FriendMapper {
 
     fun toEntity(dto: FriendCreateDto): Friend
-    fun toDtoData(entity: Friend): FriendResponseDto
+    fun toDtoResponse(entity: Friend): FriendResponseDto
     fun toDto(entity: Friend): FriendDto
     fun toDtoDelete(entity: Friend): RemoveDto
 }
