@@ -17,7 +17,3 @@ data class FriendDto(
     var name: String,
     var age: Int
 )
-
-data class FriendDeleteDto(
-    var name: String
-)

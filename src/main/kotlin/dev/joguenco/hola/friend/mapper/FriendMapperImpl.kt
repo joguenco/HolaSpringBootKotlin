@@ -1,10 +1,10 @@
 package dev.joguenco.hola.friend.mapper
 
 import dev.joguenco.hola.friend.dto.FriendDataDto
-import dev.joguenco.hola.friend.dto.FriendDeleteDto
 import dev.joguenco.hola.friend.dto.FriendResponseDto
 import dev.joguenco.hola.friend.dto.FriendDto
 import dev.joguenco.hola.friend.model.Friend
+import dev.joguenco.hola.shared.dto.RemoveDto
 import java.time.LocalDate
 import java.time.Period
 import java.util.Calendar
@@ -41,9 +41,9 @@ class FriendMapperImpl : FriendMapper {
         )
     }
 
-    override fun toDtoDelete(entity: Friend): FriendDeleteDto {
-        return FriendDeleteDto(
-            name = entity.name!!,
+    override fun toDtoDelete(entity: Friend): RemoveDto {
+        return RemoveDto(
+            deleted = entity.name!!,
         )
     }
 }
