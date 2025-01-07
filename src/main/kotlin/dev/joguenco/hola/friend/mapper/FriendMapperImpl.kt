@@ -1,8 +1,8 @@
 package dev.joguenco.hola.friend.mapper
 
 import dev.joguenco.hola.friend.dto.FriendCreateDto
-import dev.joguenco.hola.friend.dto.FriendResponseDto
 import dev.joguenco.hola.friend.dto.FriendDto
+import dev.joguenco.hola.friend.dto.FriendResponseDto
 import dev.joguenco.hola.friend.model.Friend
 import dev.joguenco.hola.shared.dto.RemoveDto
 import java.time.LocalDate
@@ -10,41 +10,32 @@ import java.time.Period
 import java.util.Calendar
 
 class FriendMapperImpl : FriendMapper {
-    override fun toEntity(dto: FriendCreateDto): Friend {
-        return Friend(
-            name = dto.name,
-            birthDate = dto.birthDate,
-            skills = dto.skills.map { SkillMapperImpl().toEntity(it) }.toMutableList()
-        )
-    }
+  override fun toEntity(dto: FriendCreateDto): Friend {
+    return Friend(
+        name = dto.name,
+        birthDate = dto.birthDate,
+        skills = dto.skills.map { SkillMapperImpl().toEntity(it) }.toMutableList())
+  }
 
-    override fun toDtoResponse(entity: Friend): FriendResponseDto {
-        return FriendResponseDto(
-            id = entity.id!!,
-            name = entity.name!!,
-            birthDate = entity.birthDate!!
-        )
-    }
+  override fun toDtoResponse(entity: Friend): FriendResponseDto {
+    return FriendResponseDto(id = entity.id!!, name = entity.name!!, birthDate = entity.birthDate!!)
+  }
 
-    override fun toDto(entity: Friend): FriendDto {
-        val calendar = Calendar.getInstance()
-        calendar.time = entity.birthDate
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+  override fun toDto(entity: Friend): FriendDto {
+    val calendar = Calendar.getInstance()
+    calendar.time = entity.birthDate
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH) + 1
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        return FriendDto(
-            name = entity.name!!,
-            age = Period.between(
-                LocalDate.of(year, month, day),
-                LocalDate.now()
-            ).years
-        )
-    }
+    return FriendDto(
+        name = entity.name!!,
+        age = Period.between(LocalDate.of(year, month, day), LocalDate.now()).years)
+  }
 
-    override fun toDtoDelete(entity: Friend): RemoveDto {
-        return RemoveDto(
-            deleted = entity.name!!,
-        )
-    }
+  override fun toDtoDelete(entity: Friend): RemoveDto {
+    return RemoveDto(
+        deleted = entity.name!!,
+    )
+  }
 }

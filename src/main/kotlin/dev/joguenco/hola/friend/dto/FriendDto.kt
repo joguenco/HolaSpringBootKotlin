@@ -8,13 +8,10 @@ data class FriendCreateDto(
     var skills: List<SkillDto> = emptyList()
 )
 
-data class FriendResponseDto(
-    var id: Long,
-    var name: String,
-    var birthDate: Date
-)
+data class FriendResponseDto(var id: Long, var name: String, var birthDate: Date)
 
 data class FriendDto(
     var name: String,
-    var age: Int
+    var age: Int,
+    var skills: MutableList<SkillDto> = mutableListOf()
 )
