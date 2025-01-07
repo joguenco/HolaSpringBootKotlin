@@ -14,7 +14,10 @@ class Friend  (
     var name: String? = null,
 
     @Column(name = "birth_date")
-    var birthDate: Date? = null
+    var birthDate: Date? = null,
+
+    @OneToMany(mappedBy = "friend", targetEntity = Skill::class, cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var skills: List<Skill> = emptyList()
 ) {
     override fun toString(): String {
         return "Friend(id=$id, name=$name)"

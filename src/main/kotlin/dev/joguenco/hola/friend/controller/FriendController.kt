@@ -1,6 +1,6 @@
 package dev.joguenco.hola.friend.controller
 
-import dev.joguenco.hola.friend.dto.FriendDataDto
+import dev.joguenco.hola.friend.dto.FriendCreateDto
 import dev.joguenco.hola.friend.dto.FriendResponseDto
 import dev.joguenco.hola.friend.service.FriendService
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,12 +28,12 @@ class FriendController {
     }
 
     @PostMapping("/friend")
-    fun createFriend(@RequestBody friend: FriendDataDto) : ResponseEntity<FriendResponseDto> {
+    fun createFriend(@RequestBody friend: FriendCreateDto) : ResponseEntity<FriendResponseDto> {
         return ResponseEntity.ok(friendService.createFriend(friend))
     }
 
     @PutMapping("/friend/{id}")
-    fun updateFriend(@PathVariable id: Long, @RequestBody friendDto: FriendDataDto) : ResponseEntity<Any> {
+    fun updateFriend(@PathVariable id: Long, @RequestBody friendDto: FriendCreateDto) : ResponseEntity<Any> {
         return try {
             ResponseEntity.ok(friendService.updateFriend(id, friendDto))
         } catch (e: Exception) {
