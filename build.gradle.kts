@@ -31,6 +31,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("io.rest-assured:rest-assured:5.5.0")
 	// SQLite
 	implementation("org.xerial:sqlite-jdbc:3.47.2.0")
 	implementation("org.hibernate.orm:hibernate-community-dialects:6.6.4.Final")

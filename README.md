@@ -37,3 +37,12 @@ and run:
 ```
 gradle :ktfmtFormat
 ```
+## Test
+Run all test
+```
+gradle :test
+```
+Run specific test
+```
+gradle :test --tests "dev.joguenco.hola.HolaTests.test ping"
+```
