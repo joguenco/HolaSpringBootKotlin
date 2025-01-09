@@ -194,8 +194,8 @@ class HolaTests {
                 .all()
                 .extract()
 
-        val skillOfMyFriend = myFriend.jsonPath().getList<Any>("skills")
-        assertEquals(skillOfMyFriend.size, 3)
+        val skillsOfMyFriend = myFriend.jsonPath().getList<Any>("skills")
+        assertEquals(skillsOfMyFriend.size, 3)
 
         RestAssured.given()
             .`when`()
