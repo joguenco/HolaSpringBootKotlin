@@ -9,20 +9,20 @@ http http://localhost:8080/hola/v1/friends
 
 ### Get one
 ```
-http http://localhost:8080/hola/v1/friend/1
+http http://localhost:8080/hola/v1/friends/1
 ```
 
 ### Create
 ```
-http POST http://localhost:8080/hola/v1/friend < friend_create.json
+http POST http://localhost:8080/hola/v1/friends < friend_create.json
 ```
 
 ### Update
 ```
-http PUT http://localhost:8080/hola/v1/friend/7 < friend_update.json
+http PUT http://localhost:8080/hola/v1/friends/7 < friend_update.json
 ```
 
 ### Delete one
 ```
-http DELETE http://localhost:8080/hola/v1/friend/7
+http DELETE http://localhost:8080/hola/v1/friends/7
 ```
