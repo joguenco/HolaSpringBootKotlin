@@ -4,6 +4,7 @@ import dev.joguenco.hola.friend.dto.FriendCreateDto
 import dev.joguenco.hola.friend.dto.FriendResponseDto
 import dev.joguenco.hola.friend.service.FriendService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -15,7 +16,7 @@ class FriendController {
 
     @GetMapping("/friends") fun getFriends() = friendService.getAllFriends()
 
-    @GetMapping("/friend/{id}")
+    @GetMapping("/friends/{id}")
     fun getFriend(@PathVariable id: Long): ResponseEntity<Any> {
         try {
             val friend = friendService.getFriendById(id)
@@ -25,12 +26,12 @@ class FriendController {
         }
     }
 
-    @PostMapping("/friend")
+    @PostMapping("/friends")
     fun createFriend(@RequestBody friend: FriendCreateDto): ResponseEntity<FriendResponseDto> {
-        return ResponseEntity.ok(friendService.createFriend(friend))
+        return ResponseEntity.status(HttpStatus.CREATED).body(friendService.createFriend(friend))
     }
 
-    @PutMapping("/friend/{id}")
+    @PutMapping("/friends/{id}")
     fun updateFriend(
         @PathVariable id: Long,
         @RequestBody friendDto: FriendCreateDto,
@@ -42,7 +43,7 @@ class FriendController {
         }
     }
 
-    @DeleteMapping("/friend/{id}")
+    @DeleteMapping("/friends/{id}")
     fun deleteFriend(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             val friend = friendService.deleteFriend(id)
