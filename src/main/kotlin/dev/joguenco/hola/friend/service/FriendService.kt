@@ -1,9 +1,6 @@
 package dev.joguenco.hola.friend.service
 
-import dev.joguenco.hola.friend.dto.FriendCreateDto
-import dev.joguenco.hola.friend.dto.FriendDto
-import dev.joguenco.hola.friend.dto.FriendResponseDto
-import dev.joguenco.hola.friend.dto.SkillDto
+import dev.joguenco.hola.friend.dto.*
 import dev.joguenco.hola.friend.mapper.FriendMapperImpl
 import dev.joguenco.hola.friend.repository.FriendRepository
 import dev.joguenco.hola.friend.repository.SkillRepository
@@ -18,16 +15,16 @@ class FriendService(
 
     private val friendMapper = FriendMapperImpl()
 
-    fun createFriend(friendDto: FriendCreateDto): FriendResponseDto {
+    fun createFriend(friendDto: FriendCreateDto): FriendDto? {
         val friend = friendMapper.toEntity(friendDto)
         friend.skills.forEach { it.friend = friend }
         val friendSaved = friendRepository.save(friend)
 
-        return friendMapper.toDtoResponse(friendSaved)
+        return getFriendById(friendSaved.id!!)
     }
 
-    fun getAllFriends(): List<FriendResponseDto> {
-        return friendRepository.findAll().map { friendMapper.toDtoResponse(it) }
+    fun getAllFriends(): List<FriendSimpleDto> {
+        return friendRepository.findAll().map { friendMapper.toSimpleDto(it) }
     }
 
     fun getFriendById(id: Long): FriendDto? {
@@ -42,14 +39,14 @@ class FriendService(
         return friend
     }
 
-    fun updateFriend(id: Long, friendDto: FriendCreateDto): FriendResponseDto {
+    fun updateFriend(id: Long, friendDto: FriendCreateDto): FriendDto? {
         val friend =
             friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
 
         friend.name = friendDto.name
         friend.birthDate = friendDto.birthDate
 
-        return friendMapper.toDtoResponse(friendRepository.save(friend))
+        return getFriendById(id)
     }
 
     fun deleteFriend(id: Long): RemoveDto {

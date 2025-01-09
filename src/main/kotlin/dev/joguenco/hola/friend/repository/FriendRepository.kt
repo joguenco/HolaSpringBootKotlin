@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query
 
 interface FriendRepository : JpaRepository<Friend, Long> {
 
-    @Query(
-        "select new dev.joguenco.hola.friend.model.Friend(f.id, f.name, f.birthDate) from Friend f"
-    )
+    @Query("select new dev.joguenco.hola.friend.model.Friend(f.id, f.name) from Friend f")
     override fun findAll(): MutableList<Friend>
 }

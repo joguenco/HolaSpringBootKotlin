@@ -2,7 +2,7 @@ package dev.joguenco.hola.friend.mapper
 
 import dev.joguenco.hola.friend.dto.FriendCreateDto
 import dev.joguenco.hola.friend.dto.FriendDto
-import dev.joguenco.hola.friend.dto.FriendResponseDto
+import dev.joguenco.hola.friend.dto.FriendSimpleDto
 import dev.joguenco.hola.friend.model.Friend
 import dev.joguenco.hola.shared.dto.RemoveDto
 import java.time.LocalDate
@@ -18,12 +18,8 @@ class FriendMapperImpl : FriendMapper {
         )
     }
 
-    override fun toDtoResponse(entity: Friend): FriendResponseDto {
-        return FriendResponseDto(
-            id = entity.id!!,
-            name = entity.name!!,
-            birthDate = entity.birthDate!!,
-        )
+    override fun toSimpleDto(entity: Friend): FriendSimpleDto {
+        return FriendSimpleDto(id = entity.id!!, name = entity.name!!)
     }
 
     override fun toDto(entity: Friend): FriendDto {
@@ -34,7 +30,9 @@ class FriendMapperImpl : FriendMapper {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         return FriendDto(
+            id = entity.id!!,
             name = entity.name!!,
+            birthDate = entity.birthDate!!,
             age = Period.between(LocalDate.of(year, month, day), LocalDate.now()).years,
         )
     }

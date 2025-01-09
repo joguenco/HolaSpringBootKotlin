@@ -1,7 +1,7 @@
 package dev.joguenco.hola.friend.controller
 
 import dev.joguenco.hola.friend.dto.FriendCreateDto
-import dev.joguenco.hola.friend.dto.FriendResponseDto
+import dev.joguenco.hola.friend.dto.FriendDto
 import dev.joguenco.hola.friend.service.FriendService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -27,7 +27,7 @@ class FriendController {
     }
 
     @PostMapping("/friends")
-    fun createFriend(@RequestBody friend: FriendCreateDto): ResponseEntity<FriendResponseDto> {
+    fun createFriend(@RequestBody friend: FriendCreateDto): ResponseEntity<FriendDto> {
         return ResponseEntity.status(HttpStatus.CREATED).body(friendService.createFriend(friend))
     }
 
