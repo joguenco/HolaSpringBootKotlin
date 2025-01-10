@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 
 @Transactional
 @Repository
-class SkillRepository : CustomSkillRepository {
+class SkillRepository : SkillCustomRepository {
 
     @PersistenceContext lateinit var entityManager: EntityManager
 
@@ -17,5 +17,14 @@ class SkillRepository : CustomSkillRepository {
             .createQuery("select s from Skill s where s.friend.id = :friendId", Skill::class.java)
             .setParameter("friendId", friendId)
             .resultList
+    }
+
+    override fun deleteSkill(id: Long) {
+        val skill = findById(id) ?: throw Exception("Skill not found")
+        entityManager.remove(skill)
+    }
+
+    fun findById(id: Long): Skill? {
+        return entityManager.find(Skill::class.java, id)
     }
 }

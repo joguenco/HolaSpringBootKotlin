@@ -34,7 +34,7 @@ class FriendService(
             )
 
         val skills = skillRepository.findAllByFriendId(id)
-        skills.map { friend.skills.add(SkillDto(it.name.toString())) }
+        skills.map { friend.skills.add(SkillDto(it.id, it.name.toString())) }
 
         return friend
     }
@@ -55,5 +55,12 @@ class FriendService(
         friendRepository.deleteById(id)
 
         return friendMapper.toDtoDelete(friend)
+    }
+
+    fun deleteSkill(id: Long, skillId: Long): RemoveDto {
+        friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
+        skillRepository.deleteSkill(skillId)
+
+        return RemoveDto("Skill removed")
     }
 }

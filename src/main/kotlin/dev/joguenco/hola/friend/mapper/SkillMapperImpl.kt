@@ -9,6 +9,6 @@ class SkillMapperImpl : SkillMapper {
     }
 
     override fun toDto(entity: Skill): SkillDto {
-        return SkillDto(name = entity.name ?: "")
+        return SkillDto(id = entity.id, name = entity.name ?: "")
     }
 }

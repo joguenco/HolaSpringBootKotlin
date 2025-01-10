@@ -26,3 +26,8 @@ http PUT http://localhost:8080/hola/v1/friends/7 < friend_update.json
 ```
 http DELETE http://localhost:8080/hola/v1/friends/7
 ```
+
+### Delete Skill of Friend
+```
+http DELETE http://localhost:8080/hola/v1/friends/11/skills/34
+```

@@ -47,7 +47,17 @@ class FriendController {
     fun deleteFriend(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             val friend = friendService.deleteFriend(id)
-            return ResponseEntity.ok(friend)
+            ResponseEntity.ok(friend)
+        } catch (e: Exception) {
+            ResponseEntity.noContent().build()
+        }
+    }
+
+    @DeleteMapping("/friends/{id}/skills/{skillId}")
+    fun deleteSkill(@PathVariable id: Long, @PathVariable skillId: Long): ResponseEntity<Any> {
+        return try {
+            val friend = friendService.deleteSkill(id, skillId)
+            ResponseEntity.ok(friend)
         } catch (e: Exception) {
             ResponseEntity.noContent().build()
         }
