@@ -27,4 +27,9 @@ class SkillRepository : SkillCustomRepository {
     fun findById(id: Long): Skill? {
         return entityManager.find(Skill::class.java, id)
     }
+
+    override fun save(skill: Skill): Skill {
+        entityManager.persist(skill)
+        return skill
+    }
 }

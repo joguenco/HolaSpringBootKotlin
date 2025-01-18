@@ -2,6 +2,7 @@ package dev.joguenco.hola.friend.service
 
 import dev.joguenco.hola.friend.dto.*
 import dev.joguenco.hola.friend.mapper.FriendMapperImpl
+import dev.joguenco.hola.friend.model.Skill
 import dev.joguenco.hola.friend.repository.FriendRepository
 import dev.joguenco.hola.friend.repository.SkillRepository
 import dev.joguenco.hola.shared.dto.RemoveDto
@@ -50,6 +51,14 @@ class FriendService(
             friendDto.skills.forEach { skillDto ->
                 if (it.id == skillDto.id) {
                     it.name = skillDto.name
+                }
+            }
+        }
+
+        friendDto.skills.map { skillDto ->
+            if (skillDto.id == null) {
+                Skill(friend = friend, name = skillDto.name).let { skill ->
+                    skillRepository.save(skill)
                 }
             }
         }
