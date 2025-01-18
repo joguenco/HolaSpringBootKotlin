@@ -3,7 +3,7 @@ package dev.joguenco.hola.friend.dto
 import java.util.Date
 
 /** Data Transfer Object for creating and update a Friend. */
-data class FriendCreateDto(
+data class FriendInDto(
     var name: String,
     var birthDate: Date,
     var skills: List<SkillDto> = emptyList(),

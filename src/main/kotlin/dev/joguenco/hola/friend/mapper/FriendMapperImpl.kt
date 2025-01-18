@@ -1,7 +1,7 @@
 package dev.joguenco.hola.friend.mapper
 
-import dev.joguenco.hola.friend.dto.FriendCreateDto
 import dev.joguenco.hola.friend.dto.FriendDto
+import dev.joguenco.hola.friend.dto.FriendInDto
 import dev.joguenco.hola.friend.dto.FriendSimpleDto
 import dev.joguenco.hola.friend.model.Friend
 import dev.joguenco.hola.shared.dto.RemoveDto
@@ -10,7 +10,7 @@ import java.time.Period
 import java.util.Calendar
 
 class FriendMapperImpl : FriendMapper {
-    override fun toEntity(dto: FriendCreateDto): Friend {
+    override fun toEntity(dto: FriendInDto): Friend {
         return Friend(
             name = dto.name,
             birthDate = dto.birthDate,

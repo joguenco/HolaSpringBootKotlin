@@ -15,7 +15,7 @@ class FriendService(
 
     private val friendMapper = FriendMapperImpl()
 
-    fun createFriend(friendDto: FriendCreateDto): FriendDto? {
+    fun createFriend(friendDto: FriendInDto): FriendDto? {
         val friend = friendMapper.toEntity(friendDto)
         friend.skills.forEach { it.friend = friend }
         val friendSaved = friendRepository.save(friend)
@@ -39,12 +39,20 @@ class FriendService(
         return friend
     }
 
-    fun updateFriend(id: Long, friendDto: FriendCreateDto): FriendDto? {
+    fun updateFriend(id: Long, friendDto: FriendInDto): FriendDto? {
         val friend =
             friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
 
         friend.name = friendDto.name
         friend.birthDate = friendDto.birthDate
+
+        friend.skills.forEach {
+            friendDto.skills.forEach { skillDto ->
+                if (it.id == skillDto.id) {
+                    it.name = skillDto.name
+                }
+            }
+        }
 
         return getFriendById(id)
     }
