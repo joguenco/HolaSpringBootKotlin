@@ -20,7 +20,7 @@ gradle bootRun
 In the plugin{} blocks in your Gradle file:
 ```
 plugins {
-        id("com.ncorti.ktfmt.gradle") version "<latest_version>"
+    id("com.ncorti.ktfmt.gradle") version "<latest_version>"
     }
 ```
 To enable different styles you can simply:
@@ -45,4 +45,16 @@ gradle test
 Run specific test
 ```
 gradle test --tests "dev.joguenco.hola.HolaTests.test ping"
+```
+## Kover
+Is a set of solutions for collecting test coverage of Kotlin code compiled for JVM and Android platforms.
+In the plugin{} blocks in your Gradle file:
+```
+plugins {
+	id("org.jetbrains.kotlinx.kover") version "<latest_version>"
+    }
+```
+and run:
+```
+gradle koverHtmlReport
 ```
