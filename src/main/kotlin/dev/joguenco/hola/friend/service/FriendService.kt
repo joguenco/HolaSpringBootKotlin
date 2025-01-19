@@ -1,8 +1,7 @@
 package dev.joguenco.hola.friend.service
 
 import dev.joguenco.hola.friend.dto.*
-import dev.joguenco.hola.friend.mapper.FriendMapperImpl
-import dev.joguenco.hola.friend.mapper.SkillMapper
+import dev.joguenco.hola.friend.mapper.FriendMapper
 import dev.joguenco.hola.friend.model.Skill
 import dev.joguenco.hola.friend.repository.FriendRepository
 import dev.joguenco.hola.friend.repository.SkillRepository
@@ -13,10 +12,8 @@ import org.springframework.stereotype.Service
 class FriendService(
     private val friendRepository: FriendRepository,
     private val skillRepository: SkillRepository,
-    skillMapper: SkillMapper,
+    private val friendMapper: FriendMapper,
 ) {
-
-    private val friendMapper = FriendMapperImpl(skillMapper)
 
     fun createFriend(friendDto: FriendInDto): FriendDto? {
         val friend = friendMapper.toEntity(friendDto)

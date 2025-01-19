@@ -49,6 +49,9 @@ class HolaTests {
 
         val idFriendCreated = savedFriend.extract().path<Int>("id")
         val nameFriendCreated = savedFriend.extract().path<String>("name")
+        val ageFriendCreated = savedFriend.extract().path<Int>("age")
+
+        assertTrue { ageFriendCreated > 0 }
 
         val deletedFriend =
             RestAssured.given()

@@ -5,14 +5,34 @@ import dev.joguenco.hola.friend.dto.FriendInDto
 import dev.joguenco.hola.friend.dto.FriendSimpleDto
 import dev.joguenco.hola.friend.model.Friend
 import dev.joguenco.hola.shared.dto.RemoveDto
+import java.time.LocalDate
+import java.time.Period
+import java.util.*
+import java.util.Calendar
+import org.mapstruct.Mapper
+import org.mapstruct.Mapping
+import org.mapstruct.Named
 
+@Mapper(componentModel = "spring")
 interface FriendMapper {
 
     fun toEntity(dto: FriendInDto): Friend
 
     fun toSimpleDto(entity: Friend): FriendSimpleDto
 
+    @Mapping(target = "age", source = "birthDate", qualifiedByName = ["calculateAge"])
     fun toDto(entity: Friend): FriendDto
 
-    fun toDtoDelete(entity: Friend): RemoveDto
+    @Named("calculateAge")
+    fun calculateAge(birthDate: Date): Int {
+        val calendar = Calendar.getInstance()
+        calendar.time = birthDate
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        return Period.between(LocalDate.of(year, month, day), LocalDate.now()).years
+    }
+
+    @Mapping(target = "deleted", source = "name") fun toDtoDelete(entity: Friend): RemoveDto
 }
