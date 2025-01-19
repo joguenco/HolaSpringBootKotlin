@@ -9,12 +9,13 @@ import java.time.LocalDate
 import java.time.Period
 import java.util.Calendar
 
-class FriendMapperImpl : FriendMapper {
+class FriendMapperImpl(private val skillMapper: SkillMapper) : FriendMapper {
+
     override fun toEntity(dto: FriendInDto): Friend {
         return Friend(
             name = dto.name,
             birthDate = dto.birthDate,
-            skills = dto.skills.map { SkillMapperImpl().toEntity(it) }.toMutableList(),
+            skills = dto.skills.map { skillMapper.toEntity(it) }.toMutableList(),
         )
     }
 

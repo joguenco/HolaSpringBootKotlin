@@ -7,6 +7,7 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.25"
 	id("com.ncorti.ktfmt.gradle") version "0.21.0"
 	id("org.jetbrains.kotlinx.kover") version "0.9.1"
+    kotlin("kapt") version "1.9.25"
 }
 
 group = "dev.joguenco"
@@ -36,6 +37,9 @@ dependencies {
 	// SQLite
 	implementation("org.xerial:sqlite-jdbc:3.47.2.0")
 	implementation("org.hibernate.orm:hibernate-community-dialects:6.6.4.Final")
+	// AutoMapper Entity to DTO
+	implementation("org.mapstruct:mapstruct:1.6.3")
+	kapt("org.mapstruct:mapstruct-processor:1.6.3")
 }
 
 kotlin {
@@ -56,4 +60,10 @@ tasks.withType<Test> {
 
 ktfmt {
 	kotlinLangStyle()
+}
+
+kapt {
+	arguments {
+		arg("mapstruct.defaultComponentModel", "spring")
+	}
 }
