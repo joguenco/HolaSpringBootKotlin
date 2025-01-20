@@ -3,7 +3,9 @@ package dev.joguenco.hola.friend.mapper
 import dev.joguenco.hola.friend.dto.FriendDto
 import dev.joguenco.hola.friend.dto.FriendInDto
 import dev.joguenco.hola.friend.dto.FriendSimpleDto
+import dev.joguenco.hola.friend.dto.SkillDto
 import dev.joguenco.hola.friend.model.Friend
+import dev.joguenco.hola.friend.model.Skill
 import dev.joguenco.hola.shared.dto.RemoveDto
 import java.time.LocalDate
 import java.time.Period
@@ -16,7 +18,15 @@ import org.mapstruct.Named
 @Mapper(componentModel = "spring")
 interface FriendMapper {
 
-    fun toEntity(dto: FriendInDto): Friend
+    @Mapping(target = "skills", source = "skills") fun toEntity(dto: FriendInDto): Friend
+
+    fun mapSkills(sourceSkills: List<SkillDto>): List<Skill> {
+        var skills: List<Skill> = emptyList()
+
+        sourceSkills.forEach { it.name.let { name -> skills += Skill(name = name) } }
+
+        return skills
+    }
 
     fun toSimpleDto(entity: Friend): FriendSimpleDto
 

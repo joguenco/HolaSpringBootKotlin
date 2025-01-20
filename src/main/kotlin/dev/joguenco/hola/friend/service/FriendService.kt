@@ -33,9 +33,6 @@ class FriendService(
                 friendRepository.findById(id).orElse(null) ?: throw Exception("Friend not found")
             )
 
-        val skills = skillRepository.findAllByFriendId(id)
-        skills.map { friend.skills.add(SkillDto(it.id, it.name.toString())) }
-
         return friend
     }
 
