@@ -4,7 +4,7 @@ Example of Spring Boot with Kotlin in Gradle
 ## Dependencies
 - Java 21
 - Gradle 8.11.1
-- SQLite
+- PostgreSQL
 
 ## Hot Reload
 In one terminal run:
