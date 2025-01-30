@@ -8,7 +8,10 @@ import jakarta.persistence.*
 class Skill(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null,
     @Column(name = "name") var name: String? = null,
-    @ManyToOne @JoinColumn(name = "friend_id") @JsonIgnore var friend: Friend? = null,
+    @ManyToOne(cascade = [CascadeType.REMOVE], fetch = FetchType.LAZY)
+    @JoinColumn(name = "friend_id")
+    @JsonIgnore
+    var friend: Friend? = null,
 ) {
     override fun toString(): String {
         return "Skill(id=$id, name=$name)"

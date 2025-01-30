@@ -12,7 +12,7 @@ class Friend(
     @OneToMany(
         mappedBy = "friend",
         targetEntity = Skill::class,
-        cascade = [CascadeType.ALL],
+        cascade = [CascadeType.REMOVE],
         fetch = FetchType.LAZY,
     )
     var skills: List<Skill> = emptyList(),
